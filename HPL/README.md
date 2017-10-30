@@ -27,6 +27,12 @@ Which version of HPL to use?
 
 
 
+## Tuning HPL-CPU
+Problem size N?
+ - 3.8GB RAM/processor (no hyperthreading)
+ - 475M of 8 byte elements
+ - 21794 Size -> 21504
+
 
 
 ### BLIS
