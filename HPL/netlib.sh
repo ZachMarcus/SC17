@@ -4,11 +4,12 @@
 hpl() {
   wget http://www.netlib.org/benchmark/hpl/hpl-2.2.tar.gz
   tar xf hpl-2.2.tar.gz
+  # Try BLIS CPU library
   cp Make.EPYC ./hpl-2.2/Make.EPYC
   source env.sh; \
   cd hpl-2.2/; \
-  make -j; \
-  make -j install
+  make arch=EPYC -j; \
+  make arch=EPYC -j install
 }
 
 # Get OpenMPI
@@ -28,6 +29,16 @@ blis() {
   ./configure --enable-cblas -p /home/zmarcus/SC17/HPL/blis/install/ --enable-shared --enable-static haswell \
   make -j; \
   make -j install
+}
+
+# Get rocBLAS
+rocblas() {
+  git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
+}
+
+# Get clBLAS
+clblas() {
+  git clone https://github.com/clMathLibraries/clBLAS.git
 }
 
 

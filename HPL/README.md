@@ -12,9 +12,11 @@ Scaling studies gotta get run
 ## GPU libraries
  - rocBLAS
  - clBLAS
- - cuBLAS?
+ - [hipBLAS](https://github.com/ROCmSoftwarePlatform/hipBLAS)
 
-Is Nvidia something we need to look at? Hardware configuration TBD
+For Nvidia to work, we use hipBLAS along with cuBLAS and rocBLAS
+
+Hardware configuration TBD
 Need to test these against one another.
 Building could be challenging
 
