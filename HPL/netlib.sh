@@ -34,6 +34,11 @@ blis() {
 # Get rocBLAS
 rocblas() {
   git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
+  mkdir rocBLAS/install
+  mkdir rocBLAS/build
+  cd rocBLAS/build; \
+  cmake -DCMAKE_INSTALL_PREFIX:PATH=/home/zmarcus/SC17/HPL/rocBLAS/install ..; \
+  make -j install
 }
 
 # Get clBLAS
