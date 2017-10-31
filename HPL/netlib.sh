@@ -1,11 +1,15 @@
 #1/binbash
 
+BASE=/home/zmarcus/SC17/HPL
+
+
 # Get HPL
 hpl() {
-  wget http://www.netlib.org/benchmark/hpl/hpl-2.2.tar.gz
-  tar xf hpl-2.2.tar.gz
+  cd $BASE; \
+  wget http://www.netlib.org/benchmark/hpl/hpl-2.2.tar.gz; \
+  tar xf hpl-2.2.tar.gz; \
   # Try BLIS CPU library
-  cp Make.EPYC ./hpl-2.2/Make.EPYC
+  cp Make.EPYC ./hpl-2.2/Make.EPYC; \
   source env.sh; \
   cd hpl-2.2/; \
   make arch=EPYC -j; \
@@ -14,19 +18,21 @@ hpl() {
 
 # Get OpenMPI
 openmpi() {
-  wget https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.gz
-  tar xf openmpi-3.0.0.tar.gz
+  cd $BASE; \
+  wget https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.gz; \
+  tar xf openmpi-3.0.0.tar.gz; \
   cd openmpi-3.0.0; \
-  ./configure --enable-static --enable-dynamic --prefix=/home/zmarcus/SC17/HPL/openmpi-3.0.0/install \
+  ./configure --enable-static --enable-dynamic --prefix=$BASE/openmpi-3.0.0/install \
   make -j; \
   make -j install
 }
 
 # Get BLIS
 blis() {
-  git clone https://github.com/flame/blis.git
+  cd $BASE; \
+  git clone https://github.com/flame/blis.git; \
   cd blis; \
-  ./configure --enable-cblas -p /home/zmarcus/SC17/HPL/blis/install/ --enable-shared --enable-static haswell \
+  ./configure --enable-threading=pthreads --enable-cblas -p $BASE/blis/install/ --enable-shared --enable-static haswell \
   make -j; \
   make -j install
 }
@@ -37,7 +43,7 @@ rocblas() {
   mkdir rocBLAS/install
   mkdir rocBLAS/build
   cd rocBLAS/build; \
-  cmake -DCMAKE_INSTALL_PREFIX:PATH=/home/zmarcus/SC17/HPL/rocBLAS/install ..; \
+  cmake -DCMAKE_INSTALL_PREFIX:PATH=$BASE/rocBLAS/install ..; \
   make -j install
 }
 
