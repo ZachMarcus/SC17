@@ -13,7 +13,7 @@ export AMDAPPSDKROOT=/opt/rocm/opencl
 #Path to OpenMPI
 export OPENMPI_PATH=$HOMEDIR/openmpi-3.0.0/install
 #Base path to Intel software
-export INTELPATH=$HOMEDIR/intel
+export INTELPATH=/opt/intel
 #Path to the Intel MKL BLAS library (usually inside $INTELPATH)
 export MKL_PATH=$INTELPATH/mkl
 #Path to libiomp (as part of ICC or standalone)

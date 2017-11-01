@@ -7,7 +7,7 @@ HOMEDIR=/home/zmarcus/SC17/rohr
 setup() {
   cd $HOMEDIR; \
   git clone https://github.com/davidrohr/hpl-gpu.git; \
-  git clone git clone https://github.com/davidrohr/caldgemm.git
+  git clone https://github.com/davidrohr/caldgemm.git
   mkdir $HOMEDIR/lib
   mkdir $HOMEDIR/tmp
 
@@ -21,4 +21,7 @@ setup() {
 
 
 }
+
+
+setup
 
