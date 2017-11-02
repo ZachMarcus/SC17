@@ -3,7 +3,6 @@ if [ "0$CALDGEMM_ENVIRONMENT" == "1" ]; then
 fi
 
 
-
 HOMEDIR=/home/zmarcus/SC17/rohr
 
 
