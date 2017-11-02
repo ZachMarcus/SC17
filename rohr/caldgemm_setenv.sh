@@ -28,7 +28,7 @@ export CUDA_PATH=/usr/local/cuda
 
 ###Add all required paths to $LD_LIBRARY_PATH
 #We want to use the most recent AMD OpenCL library. Usually this comes with the driver. If the SDK is newer than the driver, outcomment the next line.
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$AMDAPPSDKROOT/lib/x86_64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$AMDAPPSDKROOT/lib/x86_64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_PATH/lib64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ICC_PATH/lib/intel64:$MKL_PATH/lib/intel64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ACML_PATH/lib

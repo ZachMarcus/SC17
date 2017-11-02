@@ -15,3 +15,7 @@ export BUILD_SHARED_LIBS=1
 export FC=/usr/bin/gfortran-5
 export CXX=/opt/rocm/bin/hcc
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LINPACK_HOME/rocBLAS/install/lib
+
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/mkl/lib/intel64
+

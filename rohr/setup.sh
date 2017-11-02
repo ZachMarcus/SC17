@@ -42,6 +42,12 @@ hpl-gpu() {
 
 }
 
+run-it() {
+  ./dgemm -g -/ 1,2
+
+}
+
+
 #setup
 #openmpi
 #caldgemm

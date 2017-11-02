@@ -61,7 +61,7 @@ TOUCH        = touch
 # - Platform identifier ------------------------------------------------
 # ----------------------------------------------------------------------
 #
-ARCH         = rocBLAS
+ARCH         = MKL
 #
 # ----------------------------------------------------------------------
 # - HPL Directory Structure / HPL library ------------------------------
@@ -81,7 +81,7 @@ HPLlib       = $(LIBdir)/libhpl.a
 # header files,  MPlib  is defined  to be the name of  the library to be
 # used. The variable MPdir is only used for defining MPinc and MPlib.
 #
-MPdir        = /home/zmarcus/SC17/HPL/openmpi-3.0.0/install/
+MPdir        = /home/zmarcus/SC17/HPL/openmpi-3.0.0/install
 MPinc        = -I$(MPdir)/include
 MPlib        = $(MPdir)/lib/libmpi.so
 #
@@ -92,9 +92,17 @@ MPlib        = $(MPdir)/lib/libmpi.so
 # header files,  LAlib  is defined  to be the name of  the library to be
 # used. The variable LAdir is only used for defining LAinc and LAlib.
 #
-LAdir        = /opt/rocm/rocblas
-LAinc        = -I$(LAdir)/include
-LAlib        = $(LAdir)/lib/librocblas.so
+LAdir        = /opt/intel/mkl/lib/intel64
+LAinc        =
+#LAlib        = -L$(LAdir) $(LAdir)/libmkl_core.so $(LAdir)/libmkl_tbb_thread.so $(LAdir)/libmkl_sequential.so $(LAdir)/libmkl_intel_lp64.so -lmkl_core -lmkl_gf_lp64 -lmkl_intel_ilp64 -lmkl_intel_lp64
+#LAlib = -L$(LAdir) -lmkl_core -lmkl_tbb_thread -lmkl_sequential -lmkl_intel_lp64 -lmkl_gf_lp64 -lmkl_intel_ilp64 -lmkl_
+#LAlib = -L$(LAdir) -lmkl_gf_lp64 -lmkl_intel_ilp64 -lmkl_intel_lp64 -lmkl_core -lmkl_gf_ilp64 -lmkl_gf_lp64 -lmkl_intel_ilp64 -lmkl_intel_lp64 -lmkl_core -lmkl_gf_ilp64
+LAlib = $(LAdir)/libmkl_core.so $(LAdir)/libmkl_rt.so
+#$(LAdir)/libmkl_sequential.so 
+#$(LAdir)/libmkl_intel_ilp64.so
+# $(LAdir)/libmkl_gf_lp64.so $(LAdir)/libmkl_intel_ilp64.so
+#$(LAdir)/libmkl_intel_lp64.so $(LAdir)/libmkl_tbb_thread.so
+
 
 
 F2CDEFS      =
