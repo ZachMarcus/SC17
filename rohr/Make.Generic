@@ -113,6 +113,7 @@ CALDGEMMdir  = $(TOPdir)/caldgemm
 CALDGEMMlib  = $(CALDGEMMdir)/release/x86_64-pc-linux-gnu_64EXECUTABLE_dgemm_bench/cpp/caldgemm_adl.o $(CALDGEMMdir)/release/x86_64-pc-linux-gnu_64EXECUTABLE_dgemm_bench/cpp/caldgemm.o $(CALDGEMMdir)/release/x86_64-pc-linux-gnu_64EXECUTABLE_dgemm_bench/cpp/cmodules/*.o
 LAinc        = -isystem $(CALDGEMMdir)
 LAlib        = -lpthread
+LAlib = -lpthread -L/opt/intel/mkl/lib/intel64 -lmkl_core -lmkl_tbb_thread -lmkl_sequential -lmkl_intel_lp64
 
 ifneq ($(TBB_PATH), )
 LAinc        += -isystem $(TBB_PATH)/include
