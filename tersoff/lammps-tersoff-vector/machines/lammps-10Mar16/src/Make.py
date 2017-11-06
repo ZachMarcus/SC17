@@ -349,8 +349,8 @@ class Actions:
             make.addvar("CCFLAGS","-fno-alias")
           if compile_check(compiler,"-ansi-alias",1):
             make.addvar("CCFLAGS","-ansi-alias")
-          if compile_check(compiler,"-override-limits",1):
-            make.addvar("CCFLAGS","-override-limits")
+          if compile_check(compiler,"-qoverride-limits",1):
+            make.addvar("CCFLAGS","-qoverride-limits")
           make.delvar("CCFLAGS","-DLMP_INTEL_OFFLOAD")
           make.delvar("LINKFLAGS","-offload")
         elif intel.mode == "phi":
@@ -367,8 +367,8 @@ class Actions:
             make.addvar("CCFLAGS","-fno-alias")
           if compile_check(compiler,"-ansi-alias",1):
             make.addvar("CCFLAGS","-ansi-alias")
-          if compile_check(compiler,"-override-limits",1):
-            make.addvar("CCFLAGS","-override-limits")
+          if compile_check(compiler,"-qoverride-limits",1):
+            make.addvar("CCFLAGS","-qoverride-limits")
           if compile_check(compiler,'-offload-option,mic,compiler,' +
                           '"-fp-model fast=2 -mGLOB_default_function_attrs=' +
                           '\\"gather_scatter_loop_unroll=4\\""',1):

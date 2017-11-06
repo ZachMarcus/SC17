@@ -7,13 +7,13 @@ SHELL = /bin/sh
 # specify flags and libraries needed for your compiler
 
 CC =		icc
-CCFLAGS =	-O3 -openmp -DLAMMPS_MEMALIGN=64 -no-offload \
-                -xHost -fno-alias -ansi-alias -restrict -override-limits
+CCFLAGS =	-O3 -qopenmp -DLAMMPS_MEMALIGN=64 -qno-offload \
+                -xHost -fno-alias -ansi-alias -restrict -qoverride-limits
 SHFLAGS =	-fPIC
 DEPFLAGS =	-M
 
 LINK =		icc
-LINKFLAGS =	-O -openmp
+LINKFLAGS =	-O -qopenmp
 LIB =           -lstdc++
 SIZE =		size
 
