@@ -28,8 +28,8 @@ if __name__ == "__main__":
         "gpu_package_single": "mpirun -np 1 ./lammps-10Mar16/src/lmp_mpi_gpu_single -in in.tersoff -sf gpu",
         "gpu_package_double": "mpirun -np 1 ./lammps-10Mar16/src/lmp_mpi_gpu_double -in in.tersoff -sf gpu",
         "gpu_package_mixed": "mpirun -np 1 ./lammps-10Mar16/src/lmp_mpi_gpu_mixed -in in.tersoff -sf gpu",
-        "kokkos_package_vect": "mpirun -np 1 ./lammps-10Mar16/src/lmp_kokkos_cuda_vect -v p -sf kk -k on t 0 g 1 -in in.tersoff mode double",
-        "kokkos_package_novect": "mpirun -np 1 ./lammps-10Mar16/src/lmp_kokkos_cuda_novect -v p -sf kk -k on t 0 g 1 -in in.tersoff mode double"
+        "kokkos_package_vect": "mpirun -np 1 ./lammps-10Mar16/src/lmp_kokkos_cuda_vect -v p -sf kk -k on t 0 g 1 -in in.tersoff",
+        "kokkos_package_novect": "mpirun -np 1 ./lammps-10Mar16/src/lmp_kokkos_cuda_novect -v p -sf kk -k on t 0 g 1 -in in.tersoff"
     }
 
 
