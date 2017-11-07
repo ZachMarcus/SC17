@@ -44,11 +44,11 @@ ln -s nvcc_wrapper g++
 cd ../../../src
 
 if [[ ! -e lmp_kokkos_cuda_novect ]]; then
- make kokkos_cuda KOKKOS_ARCH=Maxwell50 -j10
+ make kokkos_cuda KOKKOS_ARCH=Maxwell50 -j16
  mv lmp_kokkos_cuda lmp_kokkos_cuda_novect || exit
 fi
 if [[ ! -e lmp_kokkos_omp_novect ]]; then
- make kokkos_omp -j10
+ make kokkos_omp -j16
  mv lmp_kokkos_omp lmp_kokkos_omp_novect || exit
 fi
 
@@ -61,33 +61,34 @@ cp ../../../kokkos_vector.h .
 
 
 if [[ ! -e lmp_kokkos_cuda_vect ]]; then
-  make kokkos_cuda KOKKOS_ARCH=Maxwell50 -j10
+  make kokkos_cuda KOKKOS_ARCH=Maxwell50 -j16
   mv lmp_kokkos_cuda lmp_kokkos_cuda_vect || exit
 fi
 if [[ ! -e lmp_kokkos_omp_vect ]]; then
-  make kokkos_omp -j10
+  make kokkos_omp -j16
   mv lmp_kokkos_omp lmp_kokkos_omp_vect || exit
 fi
 
 rm kokkos_vect.h
 
 # gpu
-#make no-KOKKOS
-#make yes-GPU
-#function build_gpu() {
-#  cd ../lib/gpu
-#  echo '#!/bin/bash\nmpicxx "$@"' > mpic++
-#  chmod +x mpic++
-#  a=$PATH
-#  export PATH=.:$a
-#  make -f Makefile.linux clean
-#  make -f Makefile.linux CUDA_ARCH=-arch=sm_50 CUDA_HOME=$CUDA_ROOT CUDA_PRECISION=$1 -j10
-#  export PATH=$a
-#  cd ../../src
-#  make clean-mpi
-#  make mpi -j10
-#  mv lmp_mpi lmp_mpi_gpu_$2 || exit
-#}
-#build_gpu "-D_SINGLE_SINGLE" single
-#build_gpu "-D_SINGLE_DOUBLE" mixed
-#build_gpu "-D_DOUBLE_DOUBLE" double
+make no-KOKKOS
+make yes-GPU
+function build_gpu() {
+  cd ../lib/gpu
+  echo '#!/bin/bash\nmpicxx "$@"' > mpic++
+  chmod +x mpic++
+  a=$PATH
+  export PATH=.:$a
+  make -f Makefile.linux clean
+  make -f Makefile.linux CUDA_ARCH=-arch=sm_50 CUDA_HOME=$CUDA_ROOT CUDA_PRECISION=$1 -j16
+  export PATH=$a
+  cd ../../src
+  make clean-mpi
+  make mpi -j16
+  mv lmp_mpi lmp_mpi_gpu_$2 || exit
+}
+build_gpu "-D_SINGLE_SINGLE" single
+build_gpu "-D_SINGLE_DOUBLE" mixed
+build_gpu "-D_DOUBLE_DOUBLE" double
+
