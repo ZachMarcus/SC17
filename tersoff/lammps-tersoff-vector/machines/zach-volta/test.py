@@ -7,8 +7,8 @@ def environment_setup():
 
 
 class Tester():
-    def __init__(self, num_processes, binary_name, input_file, omp_num, mode):
-        self.command = "mpirun -np {} ./lammps-10Mar16/src/{} -in {} -pk omp {} mode {}".format(num_processes, binary_name, input_file, omp_num, mode)
+    def __init__(self, num_processes, binary_name, input_file, mode):
+        self.command = "mpirun -np {} ./lammps-10Mar16/src/{} -in {} mode {}".format(num_processes, binary_name, input_file, mode)
     def run_test(self, output_file):
         proc = subprocess.check_output(self.command.split(" "))
         perf = ""
@@ -26,14 +26,14 @@ if __name__ == "__main__":
     vect_file = "vect_perf.txt"
     with open(vect_file, "w+") as f:
         f.write("ns/day\n")
-    tester = Tester(2, "lmp_kokkos_cuda_vect", "in.tersoff", 0, "double")
+    tester = Tester(2, "lmp_kokkos_cuda_vect", "in.tersoff", "double")
     for x in range(0,1):
         tester.run_test(vect_file)
 
     vect_file = "no_vect_perf.txt"
     with open(vect_file, "w") as f:
         f.write("ns/day\n")
-    tester = Tester(2, "lmp_kokkos_cuda_novect", "in.tersoff", 0, "double")
+    tester = Tester(2, "lmp_kokkos_cuda_novect", "in.tersoff", "double")
     for x in range(0, 1):
         tester.run_test(vect_file)
 
