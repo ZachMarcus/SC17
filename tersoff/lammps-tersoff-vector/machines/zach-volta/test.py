@@ -7,10 +7,10 @@ def environment_setup():
 
 
 class Tester():
-    def __init__(self, num_processes, binary_name, input_file, mode):
-        self.command = "mpirun -np {} ./lammps-10Mar16/src/{} -in {} mode {}".format(num_processes, binary_name, input_file, mode)
+    def __init__(self, command):
+        self.command = command.split(" ")
     def run_test(self, output_file):
-        proc = subprocess.check_output(self.command.split(" "))
+        proc = subprocess.check_output(self.command)
         perf = ""
         for line in proc.split("\n"):
             if "Performance: " in line:
@@ -23,20 +23,21 @@ class Tester():
 
 if __name__ == "__main__":
 #    environment_setup()
-    vect_file = "vect_perf.txt"
-    with open(vect_file, "w+") as f:
-        f.write("ns/day\n")
-    tester = Tester(2, "lmp_kokkos_cuda_vect", "in.tersoff", "double")
-    for x in range(0,1):
-        tester.run_test(vect_file)
 
-    vect_file = "no_vect_perf.txt"
-    with open(vect_file, "w") as f:
-        f.write("ns/day\n")
-    tester = Tester(2, "lmp_kokkos_cuda_novect", "in.tersoff", "double")
-    for x in range(0, 1):
-        tester.run_test(vect_file)
+    runtime_tests = {
+        "gpu_package_single": "mpirun -np 1 ./lammps-10Mar16/src/lmp_mpi_gpu_single -in in.tersoff -sf gpu",
+        "gpu_package_double": "mpirun -np 1 ./lammps-10Mar16/src/lmp_mpi_gpu_double -in in.tersoff -sf gpu",
+        "gpu_package_mixed": "mpirun -np 1 ./lammps-10Mar16/src/lmp_mpi_gpu_mixed -in in.tersoff -sf gpu",
+        "kokkos_package_vect": "mpirun -np 1 ./lammps-10Mar16/src/lmp_kokkos_cuda_vect -v p -sf kk -k on t 0 g 1 -in in.tersoff mode double",
+        "kokkos_package_novect": "mpirun -np 1 ./lammps-10Mar16/src/lmp_kokkos_cuda_novect -v p -sf kk -k on t 0 g 1 -in in.tersoff mode double"
+    }
 
 
+    for run in runtime_tests.keys():
+        with open("{}.log".format(run), "w+") as f:
+            f.write("ns/day\n")
+        tester = Tester(runtime_tests[run])
+        for x in range(0, 1):
+            tester.run_test("{}.log".format(run))
 
 
