@@ -72,6 +72,9 @@ fi
 rm kokkos_vect.h
 
 # gpu
+export PATH=/opt/openmpi/1.10.2/bin:$PATH
+export LD_LIBRARY_PATH=/opt/openmpi/1.10.2/lib:$LD_LIBRARY_PATH
+
 make no-KOKKOS
 make yes-GPU
 function build_gpu() {
