@@ -30,7 +30,12 @@ if __name__ == "__main__":
     for x in range(0,1):
         tester.run_test(vect_file)
 
-
+    vect_file = "no_vect_perf.txt"
+    with open(vect_file, "w") as f:
+        f.write("ns/day\n")
+    tester = Tester(2, "lmp_kokkos_cuda_novect", "in.tersoff", 0, "double")
+    for x in range(0, 1):
+        tester.run_test(vect_file)
 
 
 
