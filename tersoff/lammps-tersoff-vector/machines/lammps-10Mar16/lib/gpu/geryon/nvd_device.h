@@ -229,7 +229,7 @@ class UCL_Device {
   /// Returns false if accelerator cannot be shared by multiple processes
   /** If it cannot be determined, true is returned **/
   inline bool sharing_supported(const int i)
-    { return (_properties[i].computeMode == CU_COMPUTEMODE_DEFAULT); }
+    { return 1; }//(_properties[i].computeMode == CU_COMPUTEMODE_DEFAULT); }
 
   /// True if splitting device into equal subdevices supported
   inline bool fission_equal()
@@ -429,19 +429,19 @@ void UCL_Device::print_all(std::ostream &out) {
       out << "Yes\n";
     else
       out << "No\n";
-    out << "  Compute mode:                                  ";
-    if (_properties[i].computeMode == CU_COMPUTEMODE_DEFAULT)
-      out << "Default\n"; // multiple threads can use device
-    else if (_properties[i].computeMode == CU_COMPUTEMODE_EXCLUSIVE)
-      out << "Exclusive\n"; // only thread can use device
-    else if (_properties[i].computeMode == CU_COMPUTEMODE_PROHIBITED)
-      out << "Prohibited\n"; // no thread can use device
-    #if CUDART_VERSION >= 4000
-    else if (_properties[i].computeMode == CU_COMPUTEMODE_EXCLUSIVE_PROCESS)
-      out << "Exclusive Process\n"; // multiple threads 1 process
-    #endif
-    else
-      out << "Unknown\n";
+    //out << "  Compute mode:                                  ";
+    //if (_properties[i].computeMode == CU_COMPUTEMODE_DEFAULT)
+    //  out << "Default\n"; // multiple threads can use device
+    //else if (_properties[i].computeMode == CU_COMPUTEMODE_EXCLUSIVE)
+    //  out << "Exclusive\n"; // only thread can use device
+    //else if (_properties[i].computeMode == CU_COMPUTEMODE_PROHIBITED)
+    //  out << "Prohibited\n"; // no thread can use device
+    //#if CUDART_VERSION >= 4000
+    //else if (_properties[i].computeMode == CU_COMPUTEMODE_EXCLUSIVE_PROCESS)
+    //  out << "Exclusive Process\n"; // multiple threads 1 process
+    //#endif
+    //else
+    //  out << "Unknown\n";
     #endif
     #if CUDA_VERSION >= 3010
     out << "  Concurrent kernel execution:                   ";
