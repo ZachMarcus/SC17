@@ -11,7 +11,7 @@ export LDFLAGS="${LDFLAGS} -restrict -qopenmp"
 export OMP_NUM_THREADS=64
 
 
-export LD_LIBRARY_PATH=$LD_LIRBARY_PATH:/opt/openmpi/1.10.2/lib
+#export LD_LIBRARY_PATH=$LD_LIRBARY_PATH:/opt/openmpi/1.10.2/lib
 
 
 
