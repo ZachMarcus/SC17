@@ -26,6 +26,6 @@ for i in `seq 0 5`; do
     mpirun -np $3 -host $h $d/$e -in in.$s -v p vanilla > results/$h-$s-$e-double-cpu_normal_all_mpi-$i 2>&1 
     OMP_NUM_THREADS=$5 mpirun -np $4 -host $h $d/$e -in in.$s -v p vanilla -sf omp -pk omp 0 > results/$h-$s-$e-double-cpu_normal_some_mpi-$i 2>&1
     OMP_NUM_THREADS=$4 mpirun -np $5 -host $h $d/$e -in in.$s -v p vanilla -sf omp -pk omp 0 > results/$h-$s-$e-double-cpu_normal_some_omp-$i 2>&1
-    OMP_NUM_THREADS=$3 d/$e -in in.$s -v p vanilla -sf omp -pk omp 0 > results/$h-$s-$e-double-cpu_normal_all_omp-$i 2>&1
+    OMP_NUM_THREADS=$3 $d/$e -in in.$s -v p vanilla -sf omp -pk omp 0 > results/$h-$s-$e-double-cpu_normal_all_omp-$i 2>&1
   done
 done
