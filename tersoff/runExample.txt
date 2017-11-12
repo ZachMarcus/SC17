@@ -1,1 +1,0 @@
- mpirun -np 2 ../lammps-tersoff-vector/machines/zach-volta/lammps-10Mar16/src/lmp_kokkos_omp_vect -in in.tersoff -pk omp 0 mode double
