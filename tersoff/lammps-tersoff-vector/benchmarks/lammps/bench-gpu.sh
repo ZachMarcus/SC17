@@ -1,10 +1,10 @@
-#!/usr/bin/zsh
-module load gcc/4.9
-module switch openmpi intelmpi
-module switch intel intel/16.0
-module load cuda
+#!/bin/bash
+#module load gcc/4.9
+#module switch openmpi intelmpi
+#module switch intel intel/16.0
+#module load cuda
 h=`hostname -s`
-d=../../machines/$1/lammps-10Mar16/src
+d=../../machines/reproduce/lammps-10Mar16/src
 
 for s in tersoff tersoff_gpu; do
   # GPU
