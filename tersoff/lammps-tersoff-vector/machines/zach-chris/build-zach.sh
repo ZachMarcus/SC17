@@ -18,11 +18,11 @@ ln -s nvcc_wrapper g++
 cd ../../../src
 
 if [[ ! -e lmp_kokkos_cuda_novect ]]; then
- make kokkos_cuda KOKKOS_ARCH=Kepler35 -j10
+ make kokkos_cuda KOKKOS_ARCH=Kepler35 -j32
  mv lmp_kokkos_cuda lmp_kokkos_cuda_novect || exit
 fi
 if [[ ! -e lmp_kokkos_omp_novect ]]; then
- make kokkos_omp -j10
+ make kokkos_omp -j32
  mv lmp_kokkos_omp lmp_kokkos_omp_novect || exit
 fi
 
@@ -32,11 +32,11 @@ cd src
 cp ../../../kokkos_vector.h . || exit
 
 if [[ ! -e lmp_kokkos_cuda_vect ]]; then
-  make kokkos_cuda KOKKOS_ARCH=Kepler35 -j10
+  make kokkos_cuda KOKKOS_ARCH=Kepler35 -j32
   mv lmp_kokkos_cuda lmp_kokkos_cuda_vect || exit
 fi
 if [[ ! -e lmp_kokkos_omp_vect ]]; then
-  make kokkos_omp -j10
+  make kokkos_omp -j32
   mv lmp_kokkos_omp lmp_kokkos_omp_vect || exit
 fi
 
@@ -52,10 +52,10 @@ function build_gpu() {
   a=$PATH
   export PATH=.:$a
   make -f Makefile.linux clean
-  make -f Makefile.linux CUDA_ARCH=-arch=sm_70 CUDA_HOME=$CUDA_ROOT CUDA_PRECISION=$1 -j10
+  make -f Makefile.linux CUDA_ARCH=-arch=sm_70 CUDA_HOME=$CUDA_ROOT CUDA_PRECISION=$1 -j32
   export PATH=$a
   cd ../../src
-  make mpi -j10
+  make mpi -j32
   mv lmp_mpi lmp_mpi_gpu_$2 || exit
 }
 build_gpu "-D_SINGLE_SINGLE" single
