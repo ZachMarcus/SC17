@@ -45,10 +45,11 @@ if __name__ == "__main__":
             else:
                 f.write("{},{}\n".format(key, calc_difference(file1_info[key], file2_info[key])))
 
-    keys = sorted(file1_info.keys())
-    for key in keys:
-        if key not in file2_info.keys():
-            print("dang")
+#    keys = sorted(file1_info.keys())
+#    for key in keys:
+#        if key not in file2_info.keys():
+#            print("dang")
+#        else:
 
 
 
