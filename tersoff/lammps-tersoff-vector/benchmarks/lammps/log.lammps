@@ -1,0 +1,5 @@
+LAMMPS (10 Mar 2016)
+KOKKOS mode is enabled (../kokkos.cpp:36)
+  using 1 GPU(s)
+  using 0 OpenMP thread(s) per MPI task
+ERROR: KOKKOS package requires a kokkos enabled atom_style (../atom_kokkos.cpp:262)

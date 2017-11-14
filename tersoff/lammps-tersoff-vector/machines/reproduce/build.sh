@@ -18,13 +18,13 @@ ln -s nvcc_wrapper g++
 cd ../../../src
 
 if [[ ! -e lmp_kokkos_cuda_novect ]]; then
- make kokkos_cuda KOKKOS_ARCH=Kepler35 -j32
+ make kokkos_cuda KOKKOS_ARCH=Pascal60 -j32
  mv lmp_kokkos_cuda lmp_kokkos_cuda_novect || exit
 fi
-if [[ ! -e lmp_kokkos_omp_novect ]]; then
- make kokkos_omp -j32
- mv lmp_kokkos_omp lmp_kokkos_omp_novect || exit
-fi
+#if [[ ! -e lmp_kokkos_omp_novect ]]; then
+# make kokkos_omp -j32
+# mv lmp_kokkos_omp lmp_kokkos_omp_novect || exit
+#fi
 
 cd ..
 patch -p1 < ../../kokkosvect.patch || exit
@@ -32,13 +32,13 @@ cd src
 cp ../../../kokkos_vector.h . || exit
 
 if [[ ! -e lmp_kokkos_cuda_vect ]]; then
-  make kokkos_cuda KOKKOS_ARCH=Kepler35 -j32
+  make kokkos_cuda KOKKOS_ARCH=Pascal60 -j32
   mv lmp_kokkos_cuda lmp_kokkos_cuda_vect || exit
 fi
-if [[ ! -e lmp_kokkos_omp_vect ]]; then
-  make kokkos_omp -j32
-  mv lmp_kokkos_omp lmp_kokkos_omp_vect || exit
-fi
+#if [[ ! -e lmp_kokkos_omp_vect ]]; then
+#  make kokkos_omp -j32
+#  mv lmp_kokkos_omp lmp_kokkos_omp_vect || exit
+#fi
 
 rm kokkos_vect.h
 
