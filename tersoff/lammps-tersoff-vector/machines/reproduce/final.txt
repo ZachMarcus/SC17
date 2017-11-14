@@ -1,0 +1,36 @@
+cd ../../benchmarks/lammps; \
+../../machines/reproduce/lammps-10Mar16/src/lmp_kokkos_cuda_vect -in in.tersoff_gpu -v p kokkos -sf kk on t 0 g 1; \
+../../machines/reproduce/lammps-10Mar16/src/lmp_kokkos_cuda_novect -in in.tersoff_gpu -v p kokkos -sf kk on t 0 g 1; \
+../../machines/reproduce/lammps-10Mar16/src/lmp_mpi_gpu_single -sf gpu -pk gpu 1 -in in.tersoff_2e6
+
+
+to work for mpi_gpu, remove the pak.gpu call in the input script!!!
+
+need 
+in.tersoff_bench  x5 (second performance number)
+in.porter
+in.tersoff-acc
+
+for in.porter: (1 time)
+report scores
+strong scaling study from Compare performance differences from paper: max,min,mean ns/day
+
+for in.tersoff_bench: (5 times) (works for mpi_gpu and kokkos)
+report max, min, average with like error bars
+strong scaling study from Compare performance differences from paper: max,min,mean ns/day
+
+for in.tersoff-acc: (works for mpi_gpu and kokkos)
+compare single to double
+compare mixed to double
+
+
+for running kokkos: mpirun -np 1 ../../machines/reproduce/lammps-10Mar16/src/lmp_kokkos_cuda_novect -in in.tersoff_bench -k on -k on t 1 g 1 -sf kk
+and make sure that you include pak.kokkos
+
+for running gpu: mpirun -np 1 ../../machines/reproduce/lammps-10Mar16/src/lmp_mpi_gpu_single -sf gpu -pk gpu 1 -in in.tersoff_bench
+
+
+
+
+
+

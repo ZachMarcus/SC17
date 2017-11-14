@@ -1,5 +1,7 @@
 # LAMMPS input file
 
+#include pak.kokkos
+
 processors * * * grid numa
 
 units metal

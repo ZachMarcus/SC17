@@ -1,6 +1,6 @@
 # bulk Si via Tersoff
 
-include pak.$p
+#include pak.kokkos
 
 units		metal
 atom_style	atomic
