@@ -1,0 +1,68 @@
+LAMMPS (10 Mar 2016)
+KOKKOS mode is enabled (../kokkos.cpp:36)
+  using 1 GPU(s)
+  using 0 OpenMP thread(s) per MPI task
+package kokkos
+# LAMMPS input file
+
+#include pak.kokkos
+
+processors * * * grid numa
+
+units metal
+atom_style atomic
+
+boundary p p p
+
+
+lattice       diamond  5.43094977345
+Lattice spacing in x,y,z = 5.43095 5.43095 5.43095
+region        simbox  prism 0 3 0 3 0 3 0 0 0 units lattice
+create_box    1 simbox
+Created triclinic box = (0 0 0) to (16.2928 16.2928 16.2928) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  1 by 1 by 1 core grid within node
+create_atoms  1 box
+Created 216 atoms
+mass          1 28.0855
+
+# size control
+variable  rx index 1
+variable  ry index 1
+variable  rz index 1
+replicate ${rx} ${ry} ${rz}
+replicate 1 ${ry} ${rz}
+replicate 1 1 ${rz}
+replicate 1 1 1
+  triclinic box = (0 0 0) to (16.2928 16.2928 16.2928) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  1 by 1 by 1 core grid within node
+  216 atoms
+
+variable pot_file index Si_adj.tersoff
+variable pot_name index Si
+
+variable result_file index results.log
+
+variable linear_temp_cutoff index 700
+
+variable linear_offset equal $(263.85 - 0.16568 * v_linear_temp_cutoff + 0.0025061 * v_linear_temp_cutoff^2 - 2.2261e-6 * v_linear_temp_cutoff^3 - 5.0875e-11 * v_linear_temp_cutoff^4 + 8.1956e-13 * v_linear_temp_cutoff^5)
+variable linear_offset equal 737.83906169999977465
+
+variable R_adj equal 2.7
+variable D_adj equal 0.1
+print "Si Si Si 3 1 0 100390 16.217 -0.59825 0.78734 1.1E-06    1.7322  471.18  ${R_adj}  ${D_adj}  2.4799  1830.8" file ${pot_file}
+print "Si Si Si 3 1 0 100390 16.217 -0.59825 0.78734 1.1E-06    1.7322  471.18  ${R_adj}  ${D_adj}  2.4799  1830.8" file Si_adj.tersoff
+Si Si Si 3 1 0 100390 16.217 -0.59825 0.78734 1.1E-06    1.7322  471.18  2.7  0.1  2.4799  1830.8
+
+pair_style tersoff
+pair_coeff * * ${pot_file} ${pot_name}
+pair_coeff * * Si_adj.tersoff ${pot_name}
+pair_coeff * * Si_adj.tersoff Si
+
+timestep 0.00025 # 0.25fs
+
+# for absolute zero temperature
+fix      1 all box/relax tri 0.0
+minimize 0 1e-10 1000 100000
+ERROR: Cannot yet use minimize with Kokkos (../minimize.cpp:54)

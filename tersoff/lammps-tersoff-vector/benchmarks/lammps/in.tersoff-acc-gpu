@@ -1,12 +1,12 @@
 # bulk Si via Tersoff
 
-include pak.kokkos
+#include pak.kokkos
 
 units		metal
 atom_style	atomic
 
 lattice		diamond 5.431
-region		box block 0 40 0 40 0 40
+region		box block 0 20 0 20 0 10
 create_box	1 box
 create_atoms	1 box
 
@@ -23,6 +23,5 @@ fix		1 all nve
 
 timestep	0.001
 
-run		10
-
-run             2420
+thermo          100
+run		1000000
