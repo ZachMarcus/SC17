@@ -1,0 +1,1 @@
+mpirun -np 1 ../../machines/reproduce/lammps-10Mar16/src/lmp_mpi_gpu_mixed -sf gpu -pk gpu 1 -in in.tersoff-acc 

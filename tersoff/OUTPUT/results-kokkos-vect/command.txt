@@ -1,0 +1,1 @@
+mpirun -np 1 ../../machines/reproduce/lammps-10Mar16/src/lmp_kokkos_cuda_vect -in in.tersoff-acc -k on t 0 g 1 -sf kk
