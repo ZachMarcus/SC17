@@ -1,0 +1,106 @@
+LAMMPS (10 Mar 2016)
+package gpu 1
+package gpu 1
+# bulk Si via Tersoff
+
+#include pak.kokkos
+
+units		metal
+atom_style	atomic
+
+lattice		diamond 5.431
+Lattice spacing in x,y,z = 5.431 5.431 5.431
+region		box block 0 40 0 40 0 40
+create_box	1 box
+Created orthogonal box = (0 0 0) to (217.24 217.24 217.24)
+  1 by 1 by 1 MPI processor grid
+create_atoms	1 box
+Created 512000 atoms
+
+pair_style	tersoff
+pair_coeff	* * Si.tersoff Si
+mass            1 28.06
+
+velocity	all create 1000.0 376847 loop geom
+
+neighbor	1.0 bin
+neigh_modify    delay 5 every 1
+
+fix		1 all nve
+
+timestep	0.001
+
+run		10
+Neighbor list info ...
+  0 neighbor list requests
+  update every 1 steps, delay 5 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 4.2
+  ghost atom cutoff = 7.4
+  binsize = 2.1 -> bins = 104 104 104
+Memory usage per processor = 99.5776 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0         1000     -2370771            0   -2304589.9    7019.6454 
+      10    619.66723   -2345543.7            0   -2304533.5     12474.08 
+Loop time of 0.449404 on 1 procs for 10 steps with 512000 atoms
+
+Performance: 1.923 ns/day, 12.483 hours/ns, 22.252 timesteps/s
+81.7% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.34147    | 0.34147    | 0.34147    |   0.0 | 75.98
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.017025   | 0.017025   | 0.017025   |   0.0 |  3.79
+Output  | 0.0020526  | 0.0020526  | 0.0020526  |   0.0 |  0.46
+Modify  | 0.064024   | 0.064024   | 0.064024   |   0.0 | 14.25
+Other   |            | 0.02483    |            |       |  5.53
+
+Nlocal:    512000 ave 512000 max 512000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    113091 ave 113091 max 113091 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    0 ave 0 max 0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Neighbor list builds = 0
+Dangerous builds = 0
+
+run             2420
+Memory usage per processor = 99.6101 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+      10    619.66723   -2345543.7            0   -2304533.5     12474.08 
+    2430    488.02947   -2336843.1            0   -2304544.8   -3110.3736 
+Loop time of 130.285 on 1 procs for 2420 steps with 512000 atoms
+
+Performance: 1.605 ns/day, 14.955 hours/ns, 18.575 timesteps/s
+69.5% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 89.724     | 89.724     | 89.724     |   0.0 | 68.87
+Neigh   | 0.17187    | 0.17187    | 0.17187    |   0.0 |  0.13
+Comm    | 5.3535     | 5.3535     | 5.3535     |   0.0 |  4.11
+Output  | 0.0020925  | 0.0020925  | 0.0020925  |   0.0 |  0.00
+Modify  | 27.926     | 27.926     | 27.926     |   0.0 | 21.43
+Other   |            | 7.108      |            |       |  5.46
+
+Nlocal:    512000 ave 512000 max 512000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    113089 ave 113089 max 113089 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    0 ave 0 max 0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Neighbor list builds = 87
+Dangerous builds = 0
+
+Please see the log.cite file for references relevant to this simulation
+
+Total wall time: 0:02:13
